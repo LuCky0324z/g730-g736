@@ -31,6 +31,10 @@ string red(int a,int b){
     return to_string(a)+"/"+to_string(b);
 }
 
+int lcm(int a,int b){
+    return abs(a*b)/gcd(a,b);
+}
+
 signed main() {
     string str;
     getline(cin,str);
@@ -39,14 +43,14 @@ signed main() {
     string gcd_ab;
     int now=1;
     vector<string> rr = split(ret[0], '/');
-    a1 = atoi(rr[0].c_str());
-    a2 = atoi(rr[1].c_str());
+    a1 = atoll(rr[0].c_str());
+    a2 = atoll(rr[1].c_str());
     for (int i=1; i<ret.size(); i++) {
         rr = split(ret[i], '/');   
-        b1 = atoi(rr[0].c_str());     
-        b2 = atoi(rr[1].c_str());     
-        ab1 = a1*b2+a2*b1;
-        ab2 = a2*b2;
+        b1 = atoll(rr[0].c_str());     
+        b2 = atoll(rr[1].c_str());
+        ab1 = a1*(lcm(a2,b2)/a2)+b1*(lcm(a2,b2)/b2);
+        ab2 = lcm(a2,b2);
         gcd_ab = red(ab1, ab2);
         cout<<'='<<gcd_ab;
         now++;
